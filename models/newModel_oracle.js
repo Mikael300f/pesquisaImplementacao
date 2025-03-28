@@ -1,11 +1,11 @@
 const getConnection = require('../database/oracleConnection');
 
-class UserModelOracle {
-    static async getAllUsers() {
+class NewModelOracle {
+    static async getData() {
         let connection;
         try {
             connection = await getConnection();
-            const result = await connection.execute('SELECT * FROM users');
+            const result = await connection.execute('SELECT * FROM new_table');
             return result.rows;
         } catch (err) {
             console.error(err);
@@ -17,13 +17,13 @@ class UserModelOracle {
         }
     }
 
-    static async createUser(name, email) {
+    static async saveData(column1, column2) {
         let connection;
         try {
             connection = await getConnection();
             const result = await connection.execute(
-                `INSERT INTO users (name, email) VALUES (:name, :email)`,
-                { name, email },
+                `INSERT INTO new_table (column1, column2) VALUES (:column1, :column2)`,
+                { column1, column2 },
                 { autoCommit: true }
             );
             return result;
@@ -38,4 +38,4 @@ class UserModelOracle {
     }
 }
 
-module.exports = UserModelOracle;
+module.exports = NewModelOracle;

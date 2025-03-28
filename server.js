@@ -1,15 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
-const userRoutes = require('./controllers/userController'); // Importe as rotas
+const userRoutesOracle = require('./routes/userRoutes_oracle');
+
 const app = express();
-const port = 3000;
 
-// Middleware para o Express entender JSON
-app.use(express.json()); 
+app.use(express.json());
 
-// Usar as rotas do controller
-app.use('/api', userRoutes); 
+app.use('/oracle', userRoutesOracle);
 
-// Iniciar o servidor
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
